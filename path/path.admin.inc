@@ -87,16 +87,7 @@ function path_admin_form(&$form_state, $edit = array('src' => '', 'dst' => '', '
 
   $form['#alias'] = $edit;
 
-  $form['src'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Existing system path'),
-    '#default_value' => $edit['src'],
-    '#maxlength' => 128,
-    '#size' => 45,
-    '#description' => t('Specify the existing path you wish to alias. For example: node/28, forum/1, taxonomy/term/1+2.'),
-    '#field_prefix' => url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q='),
-    '#required' => TRUE,
-  );
+
   $form['dst'] = array(
     '#type' => 'textfield',
     '#title' => t('Path alias'),
@@ -128,6 +119,41 @@ function path_admin_form(&$form_state, $edit = array('src' => '', 'dst' => '', '
  * Verify that a new URL alias is valid
  */
 function path_admin_form_validate($form, &$form_state) {
+
+      $form['src'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Existing system path'),
+    '#default_value' => $edit['src'],
+    '#maxlength' => 128,
+    '#size' => 45,
+    '#description' => t('Specify the existing path you wish to alias. For example: node/28, forum/1, taxonomy/term/1+2.'),
+    '#field_prefix' => url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q='),
+    '#required' => TRUE,
+  );
+
+
+        $form['src'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Existing system path'),
+    '#default_value' => $edit['src'],
+    '#maxlength' => 128,
+    '#size' => 45,
+    '#description' => t('Specify the existing path you wish to alias. For example: node/28, forum/1, taxonomy/term/1+2.'),
+    '#field_prefix' => url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q='),
+    '#required' => TRUE,
+  );
+
+
+          $form['src'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Existing system path'),
+    '#default_value' => $edit['src'],
+    '#maxlength' => 128,
+    '#size' => 45,
+    '#description' => t('Specify the existing path you wish to alias. For example: node/28, forum/1, taxonomy/term/1+2.'),
+    '#field_prefix' => url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q='),
+    '#required' => TRUE,
+  );
   $src = $form_state['values']['src'];
   $dst = $form_state['values']['dst'];
   $pid = isset($form_state['values']['pid']) ? $form_state['values']['pid'] : 0;
@@ -147,12 +173,7 @@ function path_admin_form_validate($form, &$form_state) {
  * Save a new URL alias to the database.
  */
 function path_admin_form_submit($form, &$form_state) {
-  // Language is only set if locale module is enabled
-  path_set_alias($form_state['values']['src'], $form_state['values']['dst'], isset($form_state['values']['pid']) ? $form_state['values']['pid'] : 0, isset($form_state['values']['language']) ? $form_state['values']['language'] : '');
 
-  drupal_set_message(t('The alias has been saved.'));
-  $form_state['redirect'] = 'admin/build/path';
-  return;
 }
 
 /**
