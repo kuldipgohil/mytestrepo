@@ -1,5 +1,5 @@
 <?php
-test commit
+
 /**
  * @file
  * Administrative page callbacks for the path module.
