@@ -1,3 +1,0 @@
-<?php
-
-  watchdog('action', 'KULDIPGOHILChanged owner of @type %title to uid %name.', array('@type' => node_get_types('name', $node), '%title' => $node->title, '%name' => $owner_name));
