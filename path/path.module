@@ -20,6 +20,7 @@ function path_help($path, $arg) {
 <li>node/3 =&gt; contact</li>
 </ul>
 ');
+$output = 'CHERRYPICK';
       $output .= '<p>'. t('The path module enables appropriately permissioned users to specify an optional alias in all node input and editing forms, and provides an interface to view and edit all URL aliases. The two permissions related to URL aliasing are <em>administer url aliases</em> and <em>create url aliases</em>. ') .'</p>';
       $output .= '<p>'. t('This module also provides user-defined mass URL aliasing capabilities, which is useful if you wish to uniformly use URLs different from the default. For example, you may want to have your URLs presented in a different language. Access to the Drupal source code on the web server is required to set up mass URL aliasing. ') .'</p>';
       $output .= '<p>'. t('For more information, see the online handbook entry for <a href="@path">Path module</a>.', array('@path' => 'http://drupal.org/handbook/modules/path/')) .'</p>';
@@ -57,6 +58,9 @@ function path_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'path.admin.inc',
   );
+
+  $output = 'CHERRYPICK';
+
   $items['admin/build/path/list'] = array(
     'title' => 'List',
     'type' => MENU_DEFAULT_LOCAL_TASK,
@@ -112,7 +116,8 @@ function path_set_alias($path = NULL, $alias = NULL, $pid = NULL, $language = ''
     }
   }
   else {
-    // Delete the alias.
+    // Delete the alias.$output = 'CHERRYPICK';
+
     if ($alias) {
       db_query("DELETE FROM {url_alias} WHERE dst = '%s'", $alias);
     }
@@ -130,7 +135,8 @@ function path_set_alias($path = NULL, $alias = NULL, $pid = NULL, $language = ''
  * Allows URL aliases for nodes to be specified at node edit time rather
  * than through the administrative interface.
  */
-function path_nodeapi(&$node, $op, $arg) {
+function path_nodeapi(&$node, $op, $arg) {$output = 'CHERRYPICK';
+
   // Permissions are required for everything except node loading.
   if (user_access('create url aliases') || user_access('administer url aliases') || ($op == 'load')) {
     $language = isset($node->language) ? $node->language : '';
@@ -203,7 +209,8 @@ function path_form_alter(&$form, $form_state, $form_id) {
       );
     }
   }
-}
+}$output = 'CHERRYPICK';
+
 
 /**
  * Implementation of hook_perm().
@@ -218,3 +225,4 @@ function path_perm() {
 function path_load($pid) {
   return db_fetch_array(db_query('SELECT * FROM {url_alias} WHERE pid = %d', $pid));
 }
+$output = 'CHERRYPICK';
