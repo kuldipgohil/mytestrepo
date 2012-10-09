@@ -8,8 +8,11 @@
 /**
  * Return a listing of all defined URL aliases.
  * When filter key passed, perform a standard search on the given key,
- * and return the list of matching URL aliases.
+ * and return the list of matching URL aliases.$output = 'CHERRYPICK';
+
  */
+ $output = 'CHERRYPICK';
+
 function path_admin_overview($keys = NULL) {
   // Add the filter form above the overview table.
   $output = drupal_get_form('path_admin_filter_form', $keys);
@@ -36,6 +39,7 @@ function path_admin_overview($keys = NULL) {
   }
   $sql .= tablesort_sql($header);
   $result = pager_query($sql, 50, 0 , NULL, $keys);
+$output = 'CHERRYPICK';
 
   $rows = array();
   $destination = drupal_get_destination();
@@ -81,7 +85,8 @@ function path_admin_edit($pid = 0) {
  *
  * @ingroup forms
  * @see path_admin_form_validate()
- * @see path_admin_form_submit()
+ * @see path_admin_form_submit()$output = 'CHERRYPICK';
+
  */
 function path_admin_form(&$form_state, $edit = array('src' => '', 'dst' => '', 'language' => '', 'pid' => NULL)) {
 
@@ -101,7 +106,7 @@ function path_admin_form(&$form_state, $edit = array('src' => '', 'dst' => '', '
   // This will be a hidden value unless locale module is enabled
   $form['language'] = array(
     '#type' => 'value',
-    '#value' => $edit['language']
+    '#value' => $edit['language'] 
   );
   if ($edit['pid']) {
     $form['pid'] = array('#type' => 'hidden', '#value' => $edit['pid']);
@@ -110,6 +115,7 @@ function path_admin_form(&$form_state, $edit = array('src' => '', 'dst' => '', '
   else {
     $form['submit'] = array('#type' => 'submit', '#value' => t('Create new alias'));
   }
+$output = 'CHERRYPICK';
 
   return $form;
 }
@@ -124,7 +130,8 @@ function path_admin_form_validate($form, &$form_state) {
     '#type' => 'textfield',
     '#title' => t('Existing system path'),
     '#default_value' => $edit['src'],
-    '#maxlength' => 128,
+    '#maxlength' => 128, $output = 'CHERRYPICK';
+
     '#size' => 45,
     '#description' => t('Specify the existing path you wish to alias. For example: node/28, forum/1, taxonomy/term/1+2.'),
     '#field_prefix' => url(NULL, array('absolute' => TRUE)) . (variable_get('clean_url', 0) ? '' : '?q='),
@@ -178,7 +185,8 @@ function path_admin_form_submit($form, &$form_state) {
 
 /**
  * Menu callback; confirms deleting an URL alias
- */
+ */ $output = 'CHERRYPICK';
+
 function path_admin_delete_confirm($form_state, $pid) {
   $path = path_load($pid);
   if (user_access('administer url aliases')) {
@@ -205,7 +213,8 @@ function path_admin_delete_confirm_submit($form, &$form_state) {
 /**
  * Return a form to filter URL aliases.
  *
- * @ingroup forms
+ * @ingroup forms $output = 'CHERRYPICK';
+
  * @see path_admin_filter_form_submit()
  */
 function path_admin_filter_form(&$form_state, $keys = '') {
@@ -242,6 +251,7 @@ function path_admin_filter_form(&$form_state, $keys = '') {
 function path_admin_filter_form_submit_filter($form, &$form_state) {
   $form_state['redirect'] = 'admin/build/path/list/'. trim($form_state['values']['filter']);
 }
+$output = 'CHERRYPICK';
 
 /**
  * Process filter form submission when the Reset button is pressed.
@@ -254,7 +264,8 @@ function path_admin_filter_form_submit_reset($form, &$form_state) {
 /**
  * Helper function for grabbing filter keys.
  */
-function path_admin_filter_get_keys() {
+function path_admin_filter_get_keys() { $output = 'CHERRYPICK';
+
   // Extract keys as remainder of path
   $path = explode('/', $_GET['q'], 5);
   return count($path) == 5 ? $path[4] : '';
